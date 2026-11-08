@@ -1,0 +1,21 @@
+[Unit]
+Description=Stirrup — local LLM harness
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+WorkingDirectory=%h/stirrup
+Environment=PYTHONUNBUFFERED=1
+# Replace with your laptop's Tailscale IPv4
+Environment=LLM_HARNESS_BIND=100.x.y.z
+Environment=LLM_HARNESS_PORT=8090
+Environment=LLM_HARNESS_PRELOAD=groot
+ExecStart=/usr/bin/python3 %h/stirrup/scripts/harness.py
+Restart=always
+RestartSec=3
+KillMode=mixed
+TimeoutStopSec=25
+
+[Install]
+WantedBy=default.target

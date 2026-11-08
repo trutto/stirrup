@@ -1,0 +1,6 @@
+{"servers": {"filesystem": {
+  "command": "npx -y @modelcontextprotocol/server-filesystem /home/user",
+  "env": {},
+  "enabled": true,
+  "approved": ["*"]
+}}}

@@ -1,0 +1,8 @@
+# Local runtime, models and binaries are not committed
+models/
+bin/
+run/
+logs/
+__pycache__/
+*.pyc
+.venv/

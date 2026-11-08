@@ -5,11 +5,10 @@ voice, model downloads and synced chat history — all on one laptop, with no cl
 
 **Public writeup:** <https://trutto.github.io/stirrup/>
 
-> **What's in this repo:** the public write-up, architecture and setup guide. The reference
-> harness (`scripts/harness.py`, `scripts/ui.html`, `serve-local.sh`, the Android shell) is a
-> personal implementation and is **not included** here; model files and llama.cpp binaries are
-> also not included. The sections below document the design, configuration and commands needed to
-> build or adapt the same stack.
+> **What's in this repo:** the public write-up, architecture and setup guide, plus a **sanitized
+> source snapshot** of the reference harness in [`harness/`](harness/). Model files, llama.cpp
+> binaries, API keys, runtime state and personal paths are **not included**; the guide below
+> explains the contract, configuration and commands needed to build the stack.
 
 ![Stirrup](assets/brand.png)
 
@@ -132,6 +131,22 @@ A PWA or a minimal Android WebView shell over Tailscale. Features:
 - **Models & GPU**, **MCP tools**, **Download models**, **Agent safety** sheets
 - live "Thinking" row, tool rows and per-turn tok/s
 - automatic reconnect after sleep/network loss; interrupted turns resume when safe
+
+## Source
+
+The reference source is in [`harness/`](harness/):
+
+- `harness/scripts/harness.py` — HTTP server, phone UI, model manager, agent loop
+- `harness/scripts/ui.html` — phone UI
+- `harness/scripts/serve-local.sh` — llama.cpp model runners
+- `harness/scripts/env.sh` — binary/model paths
+- `harness/tests/` — self-test, agentic suite, guard/unit tests
+- `harness/examples/` — systemd unit, MCP and policy examples
+
+It is sanitized: no keys, tokens, personal IPs or chat data. `PHONE_SERIAL` must be set for
+`phone_send`; `LLM_HARNESS_BIND` defaults to `127.0.0.1` and should be set to your Tailscale IP for
+phone access. Copy `harness/scripts/*` into your `llm/scripts/` and `harness/tests/*` into
+`llm/tests/` before running the guide below.
 
 ## Reference setup
 
