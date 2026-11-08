@@ -5,6 +5,12 @@ voice, model downloads and synced chat history — all on one laptop, with no cl
 
 **Public writeup:** <https://trutto.github.io/stirrup/>
 
+> **What's in this repo:** the public write-up, architecture and setup guide. The reference
+> harness (`scripts/harness.py`, `scripts/ui.html`, `serve-local.sh`, the Android shell) is a
+> personal implementation and is **not included** here; model files and llama.cpp binaries are
+> also not included. The sections below document the design, configuration and commands needed to
+> build or adapt the same stack.
+
 ![Stirrup](assets/brand.png)
 
 ## The constraint
@@ -127,10 +133,11 @@ A PWA or a minimal Android WebView shell over Tailscale. Features:
 - live "Thinking" row, tool rows and per-turn tok/s
 - automatic reconnect after sleep/network loss; interrupted turns resume when safe
 
-## Setup from scratch
+## Reference setup
 
 This is a reference guide for reproducing the stack on a personal Linux laptop. Model files and
-llama.cpp binaries are not included in this repo; use the links in the model cards.
+llama.cpp binaries are not included in this repo; use the links in the model cards. If you are
+adapting your own harness, keep the same HTTP contract and chip/runner separation.
 
 ### 0. Prerequisites
 
